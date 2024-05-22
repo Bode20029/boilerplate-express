@@ -1,4 +1,5 @@
 let express = require('express');
+const req = require('express/lib/request');
 let app = express();
 require('dotenv').config()
 
@@ -15,7 +16,7 @@ app.get('/', (req, res) => {
 
 app.use('/public', express.static(__dirname + '/public'))
 
-app.get('/json', (req,res) =>{
+/*app.get('/json', (req,res) =>{
     if(process.env.MESSAGE_STYLE == 'uppercase'){
         res.json({"message": "HELLO JSON"})
 }
@@ -23,7 +24,18 @@ app.get('/json', (req,res) =>{
     else  {
         res.json({"message": "Hello json"})
     }
-})
+
+}) */
+
+app.get('/json',(req, res, next) => {
+    let first = req.get
+    let second = req.path
+    let third = req.ip
+    console.log( {first} +""+ {second} +"" +{third});
+    
+    
+    next();
+  })
 
 
 
