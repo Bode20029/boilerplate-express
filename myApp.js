@@ -27,11 +27,9 @@ app.use('/public', express.static(__dirname + '/public'))
 
 }) */
 
-app.get('/json',(req, res, next) => {
-    let first = req.get
-    let second = req.path
-    let third = req.ip
-    console.log( {first} +""+ {second} +"" +{third});
+app.use((req, res, next) => {
+    var string = req.method + " " + req.path + " - " + req.ip;
+    console.log(string);
     
     
     next();
